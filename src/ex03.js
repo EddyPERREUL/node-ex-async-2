@@ -5,10 +5,10 @@ Ecrivez un programme qui télécharge une page d'un site internet puis la copie 
 import axios from 'axios'
 import fs from 'fs/promises'
 
-const downloadAndCopy = async (url, file) => {
-    let get = await axios.get(url)
-    let reponse = await fs.writeFile(file, response.data)
-    return reponse
-}
+let htmlContent = (await axios.get(process.argv[3])).data
 
-downloadAndCopy('https://www.google.com', './index.html')
+await fs.writeFile(process.argv[2], htmlContent)
+
+console.log(
+    `Le code html ${process.argv[3]} à bien été copié dans le chemin suivant ${process.argv[2]}`
+)
